@@ -1,0 +1,24 @@
+{
+  "name": "mesh-2.0",
+  "version": "0.0.0",
+  "description": "Implements a mesh-like system for Scratch 2.0",
+  "main": "server.js",
+  "dependencies": {
+    "ws": "~0.4.32"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bobbybee/mesh-2.0.git"
+  },
+  "author": "bobbybee",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/bobbybee/mesh-2.0/issues"
+  },
+  "homepage": "https://github.com/bobbybee/mesh-2.0"
+}
