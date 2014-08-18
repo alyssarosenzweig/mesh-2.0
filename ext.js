@@ -131,7 +131,8 @@
 			['h', 'when group is full', 'whenPartyFull'],
 			
 			['r', 'my player ID', 'getPlayerID']
-		]
+		],
+		url: "https://github.com/bobbybee/mesh-2.0/blob/master/ext.js"
 	};
 	
 	ScratchExtensions.register('Mesh', descriptor, ext);
