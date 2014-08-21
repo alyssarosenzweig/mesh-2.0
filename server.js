@@ -12,6 +12,12 @@ var wss = new WebSocketServer({
 var parties = [];
 var partyAny = null;
 
+if(!process.env.COMMIT_HASH) {
+	var child = require("child_process").exec("git rev-parse HEAD", function(err, stdout, stderr) {
+		process.env.COMMIT_HASH = stdout.slice(0,-1);
+	});
+}
+
 wss.on('connection', function(ws) {
 	console.log("Incoming connection..");
 	
@@ -79,6 +85,14 @@ wss.on('connection', function(ws) {
 			} else {
 				partyAny = ws; 
 			}
+	 	} else if(message.type == "debug") {
+	 		ws.send(JSON.stringify(
+				{
+					 type: "debug",
+					 node_env: process.env.NODE_ENV || "debug",
+					 commit_hash: process.env.COMMIT_HASH || "non-git"
+				}
+			));
 	 	}
 		
 	});
