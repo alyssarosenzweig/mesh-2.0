@@ -1,3 +1,4 @@
+var http = require('http');
 var WebSocketServer = require('ws').Server;
 
 var config = {
@@ -96,3 +97,9 @@ wss.on('connection', function(ws) {
 
 	})
 })
+
+http.createServer(function(req, res) {
+	res.writeHead(200, {"Content-Type": "text/html"});
+	
+	res.end("<h1>Scratch Mesh 2.0</h1><div>If you can see this message, the Scratch Mesh 2.0 server is running correctly. However, we do not currently provide a web admin front panel! Sorry!");
+}).listen(80);
