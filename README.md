@@ -6,7 +6,11 @@ Implements a mesh-like system for Scratch 2.0, using Scratch 2.0's extension fea
 Connecting to mesh
 ========
 
-When the flag is clicked, the first thing you'll want to do is use the connect to mesh block. It has fields for an IP address and port, which whoever sets up the mesh server will tell you the values for (see the section "Hosting mesh" for more information)
+When the flag is clicked, the first thing you'll want to do is use one of the connect to mesh blocks.
+
+The block "connect to public mesh" allows you to easily connect to the mesh server run by bobbybee. This is a service provided for your own benefit, so please don't abuse it :) If you have a high bandwidth application, read on.
+
+The block "connect to mesh port" has fields for an IP address and port, which whoever sets up the mesh server will tell you the values for (see the section "Hosting mesh" for more information). This should be used if you have a complex game.
 
 Match-making
 ========
@@ -31,9 +35,9 @@ Once you are in a group, you can use the following blocks for communication:
 Advanced: Hosting mesh
 ========
 
-At the time of writing (August 14, 2014), the Scratch Team does not have a public mesh server to connect to. In the future, the Scratch Team or an advanced Scratcher may setup a public server, but for the time being, you will need to host a mesh server. 
+At the time of writing (August 21, 2014) there is a public mesh server hosted by bobbybee. You can simply use the "connect to public mesh" to use it, and therefore ignore this section. However, if you have a complex application or game, you should follow these instructions to host your own server.
 
-To host mesh, you will need node.js and the ws module.
+To host mesh, you will need node.js.
 
 1) download and install node.js from the node.js website (http://nodejs.org). If you already have node, you can skip this step
 
@@ -43,12 +47,12 @@ To host mesh, you will need node.js and the ws module.
 
 4) at your shell, enter
 
-$ npm install ws
+$ npm install
 
 5) finally, to start the server from this directory, enter at your shell:
 
-$ node server.js
+$ npm start
 
 You will need to repeat steps 3 and 5 whenever you would like to start the mesh server.
 
-On the Scratch side, the connect block should connect to your IP address and the port 4354. For making the mesh server publicly available, use your public IP address, port forwarding the port 4354. For playing over LAN (within your network), find your private IP address (typically 192.168.1.*) and connect using that from Scratch.
+On the Scratch side, the "connect to mesh server port" block should connect to your IP address and the port 4354. For making the mesh server publicly available, use your public IP address, port forwarding the port 4354. For playing over LAN (within your network), find your private IP address (typically 192.168.1.*) and connect using that from Scratch.
