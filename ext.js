@@ -123,8 +123,8 @@
 	
 	var descriptor = {
 		blocks: [
-			['w', 'connect to mesh server %s port %n', 'connect', 'localhost', 4354],
 			['w', 'connect to public mesh', 'publicConnect'],
+			['w', 'connect to mesh server %s port %n', 'connect', 'localhost', 4354],
 			
 			['-'],
 			
