@@ -51,6 +51,14 @@
 		}
 	}
 	
+	ext.publicConnect = function(callback) {
+		// this connects to a generic public mesh server
+		// while it's hard-coded at the moment, 
+		// in the future this should be something like mesh.scratch.mit.edu (I hope!)
+		
+		ext.connect("stormy-eyrie-8570.herokuapp.com", 80, callback);
+	}
+	
 	ext.broadcast = function(message) {
 		ext.send({
 			type: "broadcast",
@@ -116,6 +124,7 @@
 	var descriptor = {
 		blocks: [
 			['w', 'connect to mesh server %s port %n', 'connect', 'localhost', 4354],
+			['w', 'connect to public mesh', 'publicConnect'],
 			
 			[' ', 'broadcast %s', 'broadcast', 'message 1'],
 			['h', 'when I receive %s', 'whenIReceive', 'message 1'],
