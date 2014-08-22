@@ -126,18 +126,28 @@
 			['w', 'connect to mesh server %s port %n', 'connect', 'localhost', 4354],
 			['w', 'connect to public mesh', 'publicConnect'],
 			
-			[' ', 'broadcast %s', 'broadcast', 'message 1'],
-			['h', 'when I receive %s', 'whenIReceive', 'message 1'],
+			['-'],
 			
-			['r', 'value of %s', 'var', 'score'],
+			['h', 'when I receive %s', 'whenIReceive', 'message 1'],
+			[' ', 'broadcast %s', 'broadcast', 'message 1'],
+			
+			['-'],
+			
 			[' ', 'set %s to %s', 'setVar', 'score', '10'],
+			['r', 'value of %s', 'var', 'score'],
+			
+			['-'],
+			
+			['h', 'when group is full', 'whenPartyFull'],
 			
 			[' ', 'create group owned by %s', 'partyCreate', 'Scratch Cat'],
 			[' ', 'join the group of %s', 'partyJoin', 'Scratch Cat'],
+			
+			['-'],			
 						
 			[' ', 'join any group', 'partyJoinAny'],
 			
-			['h', 'when group is full', 'whenPartyFull'],
+			['-'],
 			
 			['r', 'my player ID', 'getPlayerID']
 		],
