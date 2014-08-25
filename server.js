@@ -30,12 +30,31 @@ wss.on('connection', function(ws) {
 		
 		for(var i = 0; i < myParty.participants.length; ++i)
 			if(myParty.participants[i] != excluding)
-				myParty.participants[i].send(data);
+				try {
+					myParty.participants[i].send(data);
+				} catch(e) {
+					console.log(e);
+					try {
+						myParty.participants[i].close();
+					} catch(e) {
+						console.log(e);
+					}
+				}
 	}
 	
 	
 	ws.on('message', function(message) {
-		message = JSON.parse(message);
+		try {
+			message = JSON.parse(message);
+		} catch(e) {
+			console.log(e);
+			try {
+				ws.close();
+			} catch(e) {
+				console.log(e);
+				// they're gone
+			}
+		}
 		console.log(message);
 		
 		if(message.type == "broadcast") {
