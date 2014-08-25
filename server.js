@@ -99,9 +99,13 @@ wss.on('connection', function(ws) {
 			}
 		} else if(message.type == "partyAny") {
 			if(partyAny) {
+				console.log("There IS a party waiting. Matching now!");
+				
 				myParty = { participants: [partyAny, ws] };
 				partyAny.emit('match', myParty);
 			} else {
+				console.log("Your the first!");
+				
 				partyAny = ws; 
 			}
 	 	} else if(message.type == "debug") {
