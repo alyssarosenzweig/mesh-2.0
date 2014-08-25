@@ -103,6 +103,8 @@ wss.on('connection', function(ws) {
 				
 				myParty = { participants: [partyAny, ws] };
 				partyAny.emit('match', myParty);
+				
+				partyAny = null;
 			} else {
 				console.log("Your the first!");
 				
