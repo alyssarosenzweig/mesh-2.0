@@ -5,6 +5,8 @@
 	
 	ext.playerID = 1;
 	
+	ext.version = "None";
+	
 	ext._shutdown = function() {
 	
 	};
@@ -91,6 +93,7 @@
 		ext.send({
 			type: "partyCreate",
 			name: name,
+			version: ext.version
 		}); 
 	}
 	
@@ -98,6 +101,7 @@
 		ext.send({
 			type: "partyJoin",
 			name: name,
+			version: ext.version
 		});
 	}
 
@@ -105,6 +109,7 @@
 	ext.partyJoinAny = function() {
 		ext.send({
 			type: "partyAny",
+			version: ext.version
 		});
 	}
 	
@@ -121,10 +126,18 @@
 		return ext.playerID;
 	}
 	
+	ext.setVersion = function(name, version) {
+		ext.version = name+" "+version;
+	}
+	
 	var descriptor = {
 		blocks: [
 			['w', 'connect to public mesh', 'publicConnect'],
 			['w', 'connect to mesh server %s port %n', 'connect', 'localhost', 4354],
+			
+			['-'],
+			
+			[' ', 'set game name to %s and version to %s', 'setVersion', 'Tag', '0.0.1'],
 			
 			['-'],
 			
