@@ -72,7 +72,7 @@ wss.on('connection', function(ws) {
 			if(!myParty) {
 				var party = {
 					name: message.name,
-					version: message.version
+					version: message.version,
 					participants: [ws]
 				}
 				
@@ -102,14 +102,14 @@ wss.on('connection', function(ws) {
 			if(partyAny[message.version]) {
 				console.log("There IS a party waiting. Matching now!");
 				
-				myParty = { participants: [partyAny, ws] };
-				partyAny.emit('match', myParty);
+				myParty = { participants: [partyAny[message.version], ws] };
+				partyAny[message.version].emit('match', myParty);
 				
 				partyAny[message.version] = null;
 			} else {
 				console.log("Your the first!");
 				
-				partyAny[message.version] = ws;; 
+				partyAny[message.version] = ws; 
 			}
 	 	} else if(message.type == "debug") {
 	 		ws.send(JSON.stringify(
@@ -128,7 +128,7 @@ wss.on('connection', function(ws) {
 		
 		console.log(party);
 		
-		for(var i= 0; i < myParty.participants.length; ++i) {
+		for(var i= 0; i < myParty.participants.length; ++i) {			
 			myParty.participants[i].send(JSON.stringify({
 				type: "partyFull",
 				playerID: i
