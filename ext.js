@@ -7,6 +7,8 @@
 	
 	ext.version = "None";
 	
+	ext.acknowledgedConnection = false;
+	
 	ext._shutdown = function() {
 	
 	};
@@ -130,10 +132,15 @@
 		ext.version = name+" "+version;
 	}
 	
+	ext.whenConnectedToMesh = function() {
+		return !ext.acknowledgedConnection && ext.isOpen;
+	}
+	
 	var descriptor = {
 		blocks: [
 			['w', 'connect to public mesh', 'publicConnect'],
 			['w', 'connect to mesh server %s port %n', 'connect', 'localhost', 4354],
+			['h', 'when connected to mesh', 'whenConnectedToMesh'],
 			
 			['-'],
 			

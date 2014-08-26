@@ -12,7 +12,7 @@ The block "connect to public mesh" allows you to easily connect to the mesh serv
 
 The block "connect to mesh port" has fields for an IP address and port, which whoever sets up the mesh server will tell you the values for (see the section "Hosting mesh" for more information). This should be used if you have a complex game.
 
-It is a good idea to add a "wait for 1 second" block after connecting.
+After a sucessful connection to the mesh servers, use the 'when connected to mesh' as the true beginning of the project.
 
 Game name and version
 ========
