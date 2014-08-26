@@ -10,7 +10,7 @@ var wss = new WebSocketServer({
 });
 
 var parties = [];
-var partyAny = null;
+var partyAny = {};
 
 if(!process.env.COMMIT_HASH) {
 	var child = require("child_process").exec("git rev-parse HEAD", function(err, stdout, stderr) {
@@ -72,6 +72,7 @@ wss.on('connection', function(ws) {
 			if(!myParty) {
 				var party = {
 					name: message.name,
+					version: message.version
 					participants: [ws]
 				}
 				
@@ -81,7 +82,7 @@ wss.on('connection', function(ws) {
 		} else if(message.type == "partyJoin") {
 			if(!myParty) {
 				for(var i = 0; i < parties.length; ++i) {
-					if(parties[i].name == message.name) {
+					if(parties[i].name == message.name && parties[i].version == message.version) {
 						parties[i].participants.push(ws);
 						myParty = parties[i];
 						parties.splice(i, 0);
@@ -98,17 +99,17 @@ wss.on('connection', function(ws) {
 				// TODO: error handling
 			}
 		} else if(message.type == "partyAny") {
-			if(partyAny) {
+			if(partyAny[message.version]) {
 				console.log("There IS a party waiting. Matching now!");
 				
 				myParty = { participants: [partyAny, ws] };
 				partyAny.emit('match', myParty);
 				
-				partyAny = null;
+				partyAny[message.version] = null;
 			} else {
 				console.log("Your the first!");
 				
-				partyAny = ws; 
+				partyAny[message.version] = ws;; 
 			}
 	 	} else if(message.type == "debug") {
 	 		ws.send(JSON.stringify(
