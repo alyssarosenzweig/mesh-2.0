@@ -8,6 +8,7 @@
 	ext.version = "None";
 	
 	ext.acknowledgedConnection = false;
+	ext.acknowledgedConnectionClosed = false;
 	
 	ext._shutdown = function() {
 	
@@ -47,11 +48,17 @@
 		}
 		
 		ext.socket.onclose = function(e) {
+			console.log("Close "+e);
 			ext.isOpen = false;
+			ext.acknowledgedConnection = true; // just in case
+			ext.acknowledgedConnectionClosed = false;
 		}
 		
 		ext.socket.onerror = function(e) {
+			console.log("Error "+e);
 			ext.isOpen = false;
+			ext.acknowledgedConnection = true; // just in case
+			ext.acknowledgedConnectionClosed = false;
 		}
 	}
 	
@@ -133,7 +140,21 @@
 	}
 	
 	ext.whenConnectedToMesh = function() {
-		return !ext.acknowledgedConnection && ext.isOpen;
+		if(!ext.acknowledgedConnection && ext.isOpen) {
+			ext.acknowledgedConnection = true;
+			return true;
+		}
+		
+		return false;
+	}
+	
+	ext.whenConnectionToMeshClosed = function() {
+		if(!ext.acknowledgedConnectionClosed && ext.acknowledgedConnection) {
+			ext.acknowledgedConnectionClosed = true;
+			return true;
+		}
+		
+		return false;
 	}
 	
 	var descriptor = {
@@ -141,6 +162,7 @@
 			['w', 'connect to public mesh', 'publicConnect'],
 			['w', 'connect to mesh server %s port %n', 'connect', 'localhost', 4354],
 			['h', 'when connected to mesh', 'whenConnectedToMesh'],
+			['h', 'when connection to mesh breaks', 'whenConnectionToMeshClosed'],
 			
 			['-'],
 			
