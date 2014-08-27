@@ -5,7 +5,16 @@
 	
 	ext.playerID = 1;
 	
-	ext.version = "None";
+	// if we're hosted on Scratch, default to the project ID
+	// else, use None
+	// nested ternary statements are to prevent reference errors
+	
+	ext.version = data ? 
+					data.project ? 
+						data.project.id ? data.project.id
+						 : "None"
+					: "None"
+				: "None";
 	
 	ext.acknowledgedConnection = false;
 	ext.acknowledgedConnectionClosed = false;
@@ -24,13 +33,13 @@
 		}
 	}
 	
-	ext.connect = function(host, port, callback) {
+	ext.connect = function(host, port) {
 		ext.socket = new WebSocket("ws://"+host+":"+port+"/", "mesh");
 		ext.isOpen = false;
 		
 		ext.socket.onopen = function(e) {
+			console.log("Connection opened");
 			ext.isOpen = true;
-			callback();
 		}
 		
 		ext.socket.onmessage = function(e) {
@@ -149,7 +158,7 @@
 	}
 	
 	ext.whenConnectionToMeshClosed = function() {
-		if(!ext.acknowledgedConnectionClosed && ext.acknowledgedConnection) {
+		if(!ext.acknowledgedConnectionClosed && ext.acknowledgedConnection && !ext.isOpen) {
 			ext.acknowledgedConnectionClosed = true;
 			return true;
 		}
@@ -159,8 +168,8 @@
 	
 	var descriptor = {
 		blocks: [
-			['w', 'connect to public mesh', 'publicConnect'],
-			['w', 'connect to mesh server %s port %n', 'connect', 'localhost', 4354],
+			[' ', 'connect to public mesh', 'publicConnect'],
+			[' ', 'connect to mesh server %s port %n', 'connect', 'localhost', 4354],
 			['h', 'when connected to mesh', 'whenConnectedToMesh'],
 			['h', 'when connection to mesh breaks', 'whenConnectionToMeshClosed'],
 			
