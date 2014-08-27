@@ -17,7 +17,7 @@ After a sucessful connection to the mesh servers, use the 'when connected to mes
 Game name and version
 ========
 
-After connecting, you need to set the game name and version. The game name should be a unique name of the project, and the version should be updated every time you update the project. This allows mesh to connect only to other people on your project, as opposed to some arbitrary project.
+Every mesh project must have a name and version. On the Scratch 2.0 website, this defaults to the project ID, so if you share your project on Scratch 2.0, you can ignore this section. However, if the project is distributed as an sb2, you need to set the game name and version. The game name should be a unique name of the project, and the version should be updated every time you update the project. This allows mesh to connect only to other people on your project, as opposed to some arbitrary project.
 
 Match-making
 ========
