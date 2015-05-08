@@ -16,9 +16,10 @@
 						 : "None"
 					: "None"
 				: "None";
-	else
+	} else {
 		ext.version = "None";
-	
+	}	
+
 	ext.acknowledgedConnection = false;
 	ext.acknowledgedConnectionClosed = false;
 	
