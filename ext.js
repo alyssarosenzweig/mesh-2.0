@@ -9,12 +9,15 @@
 	// else, use None
 	// nested ternary statements are to prevent reference errors
 	
-	ext.version = data ? 
+	if(typeof data !== 'undefined') {
+		ext.version = data ? 
 					data.project ? 
 						data.project.id ? data.project.id
 						 : "None"
 					: "None"
 				: "None";
+	else
+		ext.version = "None";
 	
 	ext.acknowledgedConnection = false;
 	ext.acknowledgedConnectionClosed = false;
